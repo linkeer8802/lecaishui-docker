@@ -1,12 +1,18 @@
-nginx-registry-proxy:
-  image: registry.lecaishui.com/nginx-registry-proxy
-  ports:
-    - 443:443
-  links:  
-    - registry:registry
-  tty: true
-  stdin_open: true 
-registry:
-  image: registry.lecaishui.com/registry
-  tty: true
-  stdin_open: true
+version: '2'
+services:
+  nginx-registry-proxy:
+    build: 
+      context: ./nginx-registry-proxy
+    image: registry.lecaishui.com/nginx-registry-proxy
+    ports:
+      - 443:443
+    links:  
+      - registry:registry
+    tty: true
+    stdin_open: true 
+  registry:
+    build: 
+      context: ./registry
+    image: registry.lecaishui.com/registry
+    tty: true
+    stdin_open: true
