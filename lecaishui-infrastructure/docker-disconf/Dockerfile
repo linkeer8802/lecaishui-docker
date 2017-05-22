@@ -10,7 +10,7 @@ ENV ONLINE_CONFIG_PATH /opt/disconf-rd/online-resources
 ENV WAR_ROOT_PATH /opt/disconf-rd/war
 
 # Add required jars into a extra libarary directory
-RUN git clone ${DISCONF_REPO} && cp conf/rd/*.* disconf-rd/online-resources && cd disconf/disconf-web && sh deploy/deploy.sh
+RUN git clone ${DISCONF_REPO} && cp ./conf/online-resources/*.* disconf-rd/online-resources && cd disconf/disconf-web && sh deploy/deploy.sh
 
 ENTRYPOINT []
 CMD ["/bin/bash"]
