@@ -11,12 +11,14 @@ services:
     tty: true
   mysql:
      image: mysql
+     restart: always
      environment:
        MYSQL_ROOT_PASSWORD: '123456'
      volumes:
        - ./initsql:/docker-entrypoint-initdb.d
   redis:
     image: redis
+    restart: always
   zookeeper:
     image: zookeeper
   disconf-webapp:
