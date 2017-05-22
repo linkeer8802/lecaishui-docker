@@ -1,4 +1,4 @@
-FROM maven
+FROM pzedu/maven
 MAINTAINER weird <linkeer8802@gmail.com>
 
 RUN mkdir -p /opt/disconf-rd/online-resources && mkdir -p /opt/disconf-rd/war
