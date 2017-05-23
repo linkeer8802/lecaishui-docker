@@ -1,11 +1,22 @@
-nginx:
-  image: nginx
-  volumes:
-    - ./conf/nginx.conf:/etc/nginx/nginx.conf
-  ports:
-    - "80:80"
-  restart: always
-  volumes_from:
-    - disconf-data
-  links:
-    - docker-disconf_disconf-webapp_1:disconf-webapp
+version: '2'
+
+services:
+
+  nginx:
+    image: nginx
+    volumes:
+      - disconf-data-volume:/opt/disconf-rd/war
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - lecaishuiinfrastructure_base_network
+      
+networks:
+  lecaishuiinfrastructure_base_network:
+    external: true
+    
+volumes:
+  disconf-data-volume:
+    external: true

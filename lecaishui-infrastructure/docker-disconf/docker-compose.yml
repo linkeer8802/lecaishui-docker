@@ -1,22 +1,32 @@
 version: '2'
 
 services:
+
   disconf-data:
     build: .
     image: pzedu/disconf
+    networks:
+      - lecaishuiinfrastructure_base_network
     volumes:
-      - /opt/disconf-rd/war
+      - disconf-data-volume:/opt/disconf-rd/war
     command: echo disconf data container
     stdin_open: true
     tty: true
+    
   disconf-webapp:
      image: tomcat:7-jre8
      restart: always
      volumes:
-        - ./conf/server.xml:/usr/local/tomcat/conf/server.xml
-     volumes_from:
-        - disconf-data
-     external_links:
-        - lecaishuiinfrastructure_mysql_1:mysql
-        - lecaishuiinfrastructure_redis_1:redis
-        - lecaishuiinfrastructure_zookeeper_1:zookeeper
+       - /dev/./urandom:/dev/random
+       - disconf-data-volume:/usr/local/tomcat/webapps/ROOT
+     networks:
+       lecaishuiinfrastructure_base_network:
+         aliases:
+           - disconf-webapp
+       
+networks:
+  lecaishuiinfrastructure_base_network:
+    external: true
+    
+volumes:
+  disconf-data-volume:
