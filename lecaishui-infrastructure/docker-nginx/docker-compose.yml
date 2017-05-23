@@ -8,4 +8,4 @@ nginx:
   volumes_from:
     - disconf-data
   links:
-    - disconf-webapp:disconf-webapp
+    - docker-disconf_disconf-webapp_1:disconf-webapp
