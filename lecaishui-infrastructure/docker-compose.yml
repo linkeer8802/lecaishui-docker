@@ -1,0 +1,36 @@
+ftpserver:
+  image: webdevops/vsftp
+  restart: always
+  ports:
+    - "20:20"
+    - "21:21"
+  environment:
+     FTP_USER: 'lecaishui-ftp-user'
+     FTP_PASSWORD: 'lecaishui!@#'
+     FTP_PATH: '/pzedu/doc'
+  volumes:
+     - /pzedu/doc:/pzedu/doc
+mysql:
+   image: mysql
+   restart: always
+   ports:
+    - "3306:3306"
+   environment:
+     MYSQL_ROOT_PASSWORD: '123456'
+   volumes:
+     - /pzedu/data/mysql:/var/lib/mysql
+     - /pzedu/conf/mysql:/etc/mysql/conf.d
+     - ./docker-disconf/initsql:/docker-entrypoint-initdb.d
+redis:
+  image: redis
+  restart: always
+  volumes:
+     - /pzedu/data/redis:/data
+  ports:
+    - "6379:6379"
+  command: redis-server --appendonly yes
+zookeeper:
+  image: zookeeper
+  ports:
+    - "2181:2181"
+  restart: always
