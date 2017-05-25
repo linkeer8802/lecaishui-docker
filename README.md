@@ -44,13 +44,13 @@ vi /etc/docker/daemon.json
 ## 服务安装与运行 ##
 **一、创建目录**
 
-mkdir pzedu (*根目录*)
+mkdir /pzedu (*根目录*)
 
-mkdir -p pzedu/data (*数据目录*)
+mkdir -p /pzedu/data (*数据目录*)
 
-mkdir -p pzedu/conf (*配置目录*)
+mkdir -p /pzedu/conf (*配置目录*)
 
-mkdir -p pzedu/doc (*文档目录*)
+mkdir -p /pzedu/doc (*文档目录*)
 
 mkdir -p /pzedu/doc/pzedu-axure (*产品原型线框文档*)
 
@@ -60,7 +60,7 @@ chown -R 1000:1000 /pzedu/doc/
 
 **二、下载git项目**
 
-cd pzedu
+cd /pzedu
  
 git clone https://github.com/linkeer8802/lecashui-docker.git
 
