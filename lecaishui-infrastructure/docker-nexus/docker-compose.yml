@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+
+  nexus:
+    image: sonatype/nexus
+    volumes:
+      - /pzedu/data/nexus:/sonatype-work
+    ports:
+      - "6080:8081"
+    restart: always
+    environment:
+      MIN_HEAP: 128m
+      MAX_HEAP: 256m
+    networks:
+      - lecaishuiinfrastructure_base_network
+      
+networks:
+  lecaishuiinfrastructure_base_network:
+    external: true

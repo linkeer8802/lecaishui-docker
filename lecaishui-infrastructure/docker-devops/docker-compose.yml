@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+
+  nexus:
+    image: jenkins
+    volumes:
+      - /pzedu/data/jenkins:/var/jenkins_home
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    restart: always
+    networks:
+      - lecaishuiinfrastructure_base_network
+      
+networks:
+  lecaishuiinfrastructure_base_network:
+    external: true
