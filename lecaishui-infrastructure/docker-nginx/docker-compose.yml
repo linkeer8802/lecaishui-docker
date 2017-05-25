@@ -5,8 +5,9 @@ services:
   nginx:
     image: nginx
     volumes:
-      - disconf-data-volume:/opt/disconf-rd/war
-      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./conf:/etc/nginx/conf.d
+      - /pzedu/doc:/pzedu/doc
+      - dockerdisconf_disconf-data-volume:/opt/disconf-rd/war
     ports:
       - "80:80"
     restart: always
@@ -18,5 +19,5 @@ networks:
     external: true
     
 volumes:
-  disconf-data-volume:
+  dockerdisconf_disconf-data-volume:
     external: true

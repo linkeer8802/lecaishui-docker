@@ -11,9 +11,9 @@ services:
     environment:
        FTP_USER: 'lecaishui-ftp-user'
        FTP_PASSWORD: 'lecaishui!@#'
-       FTP_PATH: '/pzedu/doc'
+       FTP_PATH: '/home/lecaishui-ftp-user'
     volumes:
-       - /pzedu/doc:/pzedu/doc
+       - /pzedu/doc:/home/lecaishui-ftp-user
     networks:
        base_network:
          aliases:
