@@ -44,17 +44,13 @@ vi /etc/docker/daemon.json
 ## 服务安装与运行 ##
 **一、创建目录**
 
-根目录
-mkdir pzedu
+mkdir pzedu (*根目录*)
 
-数据目录
-mkdir -p pzedu/data
+mkdir -p pzedu/data (*数据目录*)
 
-配置目录
-mkdir -p pzedu/conf
+mkdir -p pzedu/conf (*配置目录*)
 
-文档目录
-mkdir -p pzedu/doc
+mkdir -p pzedu/doc (*文档目录*)
 
 mkdir -p /pzedu/doc/pzedu-axure (*产品原型线框文档*)
 
