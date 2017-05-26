@@ -62,7 +62,7 @@ chown -R 1000:1000 /pzedu/doc/
 
 cd /pzedu
  
-git clone https://github.com/linkeer8802/lecashui-docker.git
+git clone https://github.com/linkeer8802/lecaishui-docker.git
 
 
 **三、build镜像**
