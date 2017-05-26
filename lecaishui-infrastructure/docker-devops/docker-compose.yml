@@ -1,18 +1,58 @@
 version: '2'
 
 services:
-
-  nexus:
-    image: jenkins
+  jenkins:
+    image : jenkins
+    restart: always
+    ports:
+      - "6180:8080"
     volumes:
       - /pzedu/data/jenkins:/var/jenkins_home
-    ports:
-      - "8080:8080"
-      - "50000:50000"
-    restart: always
+      - ./conf/jenkins/log.properties:/var/jenkins_home/log.properties
+    environment:
+      - "JAVA_OPTS:-Djava.util.logging.config.file=/var/jenkins_home/log.properties"
     networks:
-      - lecaishuiinfrastructure_base_network
-      
+      - base_network
+
+  #docker hub link for image https://hub.docker.com/r/blacklabelops/jira/
+  jira:
+    image: blacklabelops/jira
+    restart: always
+    ports:
+      - '6181:8080'
+    volumes:
+      - /pzedu/data/jira:/var/atlassian/jira
+      - ./conf/jira/atlassian-extras-3.2.jar:/opt/jira/atlassian-jira/WEB-INF/lib/atlassian-extras-3.2.jar
+    environment:
+      - 'JIRA_DATABASE_URL=mysql://jiraadmin@jira_mysql/jiradb'
+      - 'JIRA_DB_PASSWORD=jiraadmin'
+      - 'CATALINA_OPTS= -Xms256m -Xmx1g'
+      #nginx proxy
+#      - 'JIRA_PROXY_NAME='
+#      - 'JIRA_PROXY_PORT='
+#      - 'JIRA_PROXY_SCHEME='
+      - 'DOCKER_WAIT_HOST=jira_mysql'
+      - 'DOCKER_WAIT_PORT=3306'
+    links:
+      - jira_mysql
+    networks:
+      - base_network
+
+  jira_mysql:
+    image: mysql:5.6
+#    ports:
+#      - "3306:3306"
+    volumes:
+      - ./conf/mysql/conf.d:/etc/mysql/conf.d
+      - /pzedu/data/jira_mysql:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=123456"
+      - "MYSQL_DATABASE=jiradb"
+      - "MYSQL_USER=jiraadmin"
+      - "MYSQL_PASSWORD=jiraadmin"
+    networks:
+      - base_network
+
 networks:
-  lecaishuiinfrastructure_base_network:
-    external: true
+    base_network:
+      driver: bridge
