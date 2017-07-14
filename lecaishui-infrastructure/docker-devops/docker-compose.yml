@@ -35,6 +35,14 @@ services:
       - 'DOCKER_WAIT_PORT=3306'
     networks:
       - lecaishuiinfrastructure_base_network
+  solr:
+    build: ./solr
+    restart: always
+    port:
+      - "6182:8983"
+    volumes:
+      - "/pzedu/data/solr/*:/opt/solr/server/solr/*"
+      - "./conf/solr:/opt/solr/server/solr/lib"
       
 networks:
   lecaishuiinfrastructure_base_network:

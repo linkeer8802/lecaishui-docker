@@ -14,6 +14,10 @@ chown -R 1000:1000 /pzedu/data/jira
 
 mkdir -p /pzedu/data/jira_mysql (*jira mysql 数据库目录*)
 
+mkdir -p /pzedu/data/solr/ (*solr core 数据目录*)
+
+chown -R 8983:8983 /pzedu/data/solr
+
 **二、下载git项目**
 
 cd /pzedu
@@ -22,7 +26,7 @@ git clone https://github.com/linkeer8802/lecaishui-docker.git
 
 **三、运行容器**
 
-1. 启动jenkis、jira、mysql
+1. 启动jenkis、jira、solr
 
 cd /pzedu/lecashui-docker/lecaishui-infrastructure/docker-devops
 
