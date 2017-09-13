@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+
+  tfs-ns:
+    build: .
+    image: tfs:2.2.16
+    networks:
+      tfs_net:
+        ipv4_address: 172.28.238.10
+    volumes:
+      - ./conf:/usr/local/tfs/conf
+    command: ./bin/nameserver -f ./conf/ns.conf
+    stdin_open: true
+    tty: true
+
+  tfs-ds1:
+    build: .
+    image: tfs:2.2.16
+    networks:
+      tfs_net:
+        ipv4_address: 172.28.238.11
+    volumes:
+      - ./conf:/usr/local/tfs/conf
+      - /data/disk1:/data/disk1
+      - /data/disk2:/data/disk2
+    command: ./bin/dataserver -f ./conf/ds1.conf -i 1
+    stdin_open: true
+    tty: true
+  tfs-ds2:
+    build: .
+    image: tfs:2.2.16
+    networks:
+      tfs_net:
+        ipv4_address: 172.28.238.12
+    volumes:
+      - ./conf:/usr/local/tfs/conf
+      - /data/disk1:/data/disk1
+      - /data/disk2:/data/disk2
+    command: ./bin/dataserver -f ./conf/ds2.conf -i 2
+    stdin_open: true
+    tty: true    
+
+networks:
+  tfs_net:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

@@ -1,9 +1,11 @@
 version: '2'
 services:
   nginx-registry-proxy:
-    build: 
-      context: ./nginx-registry-proxy
-    image: registry.lecaishui.com/nginx-registry-proxy
+    image: nginx
+    volumes:
+      - ./nginx-registry-proxy/conf:/etc/nginx/conf.d
+      - ./nginx-registry-proxy/auth:/etc/nginx/auth
+      - ./nginx-registry-proxy/certs:/etc/nginx/certs
     ports:
       - 443:443
     links:  
@@ -11,8 +13,8 @@ services:
     tty: true
     stdin_open: true 
   registry:
-    build: 
-      context: ./registry
-    image: registry.lecaishui.com/registry
+    image: registry:2
+    volumes:
+      - ./registry/certs:/certs
     tty: true
     stdin_open: true
