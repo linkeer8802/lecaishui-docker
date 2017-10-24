@@ -1,0 +1,19 @@
+version: '3'
+services:
+  zoo1:
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == infrastructure-service
+  
+  zoo2:
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == infrastructure-service 
+  
+  zoo3:
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == infrastructure-service

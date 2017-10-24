@@ -3,30 +3,18 @@ services:
   registry:
     image: registry:2
     volumes:
-      - ./registry/certs:/certs
       - registry-data:/var/lib/registry
     tty: true
     stdin_open: true
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
 
   nginx-registry-proxy:
     image: nginx
-    volumes:
-      - ./nginx-registry-proxy/conf:/etc/nginx/conf.d
-      - ./nginx-registry-proxy/auth:/etc/nginx/auth
-      - ./nginx-registry-proxy/certs:/etc/nginx/certs
     ports:
       - 443:443
     depends_on:
       - registry
     tty: true
     stdin_open: true 
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
+    
 volumes:
   registry-data:

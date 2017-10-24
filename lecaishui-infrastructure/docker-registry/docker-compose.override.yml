@@ -1,0 +1,11 @@
+version: '3'
+services:
+  registry:
+    volumes:
+      - ./registry/certs:/certs
+
+  nginx-registry-proxy:
+    volumes:
+      - ./nginx-registry-proxy/conf:/etc/nginx/conf.d
+      - ./nginx-registry-proxy/auth:/etc/nginx/auth
+      - ./nginx-registry-proxy/certs:/etc/nginx/certs

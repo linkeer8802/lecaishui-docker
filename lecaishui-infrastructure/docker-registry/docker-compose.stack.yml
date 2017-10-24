@@ -1,0 +1,13 @@
+version: '3'
+services:
+  registry:
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  nginx-registry-proxy:
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
