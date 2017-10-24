@@ -1,5 +1,17 @@
-version: '2'
+version: '3'
 services:
+  registry:
+    image: registry:2
+    volumes:
+      - ./registry/certs:/certs
+      - registry-data:/var/lib/registry
+    tty: true
+    stdin_open: true
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
   nginx-registry-proxy:
     image: nginx
     volumes:
@@ -8,13 +20,13 @@ services:
       - ./nginx-registry-proxy/certs:/etc/nginx/certs
     ports:
       - 443:443
-    links:  
-      - registry:registry
+    depends_on:
+      - registry
     tty: true
     stdin_open: true 
-  registry:
-    image: registry:2
-    volumes:
-      - ./registry/certs:/certs
-    tty: true
-    stdin_open: true
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+volumes:
+  registry-data:

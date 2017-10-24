@@ -1,0 +1,23 @@
+version: '3'
+services:
+  jenkins:
+    image: registry.lecaishui.com/jenkins-with-nodejs
+    volumes:
+      - jenkins-data:/var/jenkins_home
+    networks:
+      - jenkins-net
+    ports:
+      - 8000:8080
+      - 50000:50000
+    extra_hosts:
+      - "nexus.lecaishui.com:192.168.1.33"
+    tty: true
+    stdin_open: true
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager    
+volumes:
+  jenkins-data:
+networks:
+  jenkins-net:

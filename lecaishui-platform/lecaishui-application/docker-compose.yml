@@ -1,0 +1,92 @@
+version: '2'
+
+services:
+  
+  platform-code:
+    build: .
+    image: pzedu/platform_code
+    command: echo platform build code container
+    networks:
+       - platform_network
+    volumes:
+      - platform-code-volume:/pzedu/code
+    stdin_open: true
+    tty: true
+  
+  usercenter-dubbo:
+    image: openjdk:8-jre
+    restart: always
+    volumes:
+       - platform-code-volume:/pzedu/code
+    working_dir: /pzedu/code/usercenter-dubbo-provider/usercenter
+    command: bin/start.sh debug small
+    networks:
+       platform_network:
+         aliases:
+            - usercenter
+            
+  courses-dubbo:
+    image: openjdk:8-jre
+    restart: always
+    volumes:
+       - platform-code-volume:/pzedu/code
+    working_dir: /pzedu/code/courses-dubbo-provider/courses
+    command: bin/start.sh debug small    
+    networks:
+       platform_network:
+         aliases:
+            - courses
+            
+  admin-dubbo:
+    image: openjdk:8-jre
+    restart: always
+    networks:
+       platform_network:
+         aliases:
+            - admin  
+            
+  cms-dubbo:
+    image: openjdk:8-jre
+    restart: always
+    networks:
+       platform_network:
+         aliases:
+            - cms  
+            
+  website-app:
+    image: tomcat:7-jre8
+    restart: always
+    networks:
+       platform_network:
+         aliases:
+            - website-app
+              
+  backend-app:
+    image: tomcat:7-jre8
+    restart: always
+    networks:
+       platform_network:
+         aliases:
+            - backend-app 
+  
+  mobile-app:
+    image: tomcat:7-jre8
+    restart: always
+    networks:
+       platform_network:
+         aliases:
+            - mobile-app  
+            
+  orgmanage-app:
+    image: tomcat:7-jre8
+    restart: always
+    networks:
+       platform_network:
+         aliases:
+            - orgmanage-app  
+
+networks:
+  platform_network:
+
+volumes:
+  platform-code-volume:  
