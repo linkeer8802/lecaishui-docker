@@ -11,94 +11,55 @@ services:
       - platform-code-volume:/pzedudata/lecaishui-platform
     stdin_open: true
     tty: true
-#    deploy:
-#          mode: global
-    deploy:
-      restart_policy:
-        condition: none
-      placement:
-        constraints:
-          - node.labels.name == dubbo-service
   
   usercenter-dubbo:
     image: registry.lecaishui.com/openjdk:latest
-    restart: always
     volumes:
        - platform-code-volume:/pzedudata/lecaishui-platform
-    extra_hosts:
-      - "disconf.lecaishui.com:192.168.1.43"       
     working_dir: /pzedudata/lecaishui-platform/lecaishui-services/usercenter-dubbo-provider/usercenter
-    command: bin/start.sh debug small stdout
     depends_on:
       - build-code
     networks:
        platform_network:
          aliases:
             - usercenter
-    deploy:
-      placement:
-        constraints:
-          - node.labels.name == dubbo-service
                       
   courses-dubbo:
     image: registry.lecaishui.com/openjdk:latest
-    restart: always
     volumes:
        - platform-code-volume:/pzedudata/lecaishui-platform
-    extra_hosts:
-      - "disconf.lecaishui.com:192.168.1.43"       
     working_dir: /pzedudata/lecaishui-platform/lecaishui-services/courses-dubbo-provider/courses
-    command: bin/start.sh debug small stdout
     depends_on:
       - build-code   
     networks:
        platform_network:
          aliases:
             - courses
-    deploy:
-      placement:
-        constraints:
-          - node.labels.name == dubbo-service
                       
   admin-dubbo:
     image: registry.lecaishui.com/openjdk:latest
-    restart: always
     volumes:
        - platform-code-volume:/pzedudata/lecaishui-platform
-    extra_hosts:
-      - "disconf.lecaishui.com:192.168.1.43"       
     working_dir: /pzedudata/lecaishui-platform/lecaishui-services/admin-dubbo-provider/admin
-    command: bin/start.sh debug small stdout
     depends_on:
       - build-code 
     networks:
        platform_network:
          aliases:
             - admin  
-    deploy:
-      placement:
-        constraints:
-          - node.labels.name == dubbo-service
                       
   cms-dubbo:
     image: registry.lecaishui.com/openjdk:latest
     restart: always
     volumes:
        - platform-code-volume:/pzedudata/lecaishui-platform
-    extra_hosts:
-      - "disconf.lecaishui.com:192.168.1.43"       
     working_dir: /pzedudata/lecaishui-platform/lecaishui-services/cms-dubbo-provider/cms
-    command: bin/start.sh debug small stdout
     depends_on:
       - build-code 
     networks:
        platform_network:
          aliases:
             - cms  
-    deploy:
-      placement:
-        constraints:
-          - node.labels.name == dubbo-service
                       
 #  website-app:
 #    image: registry.lecaishui.com/tomcat:latest

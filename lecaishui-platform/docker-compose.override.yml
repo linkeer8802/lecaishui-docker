@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  usercenter-dubbo:
+    restart: always       
+                      
+  courses-dubbo:
+    restart: always
+                      
+  admin-dubbo:
+    restart: always
+                      
+  cms-dubbo:
+    restart: always
+                      
+#  website-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - website-app
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+#                        
+#  backend-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - backend-app 
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+#            
+#  mobile-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - mobile-app  
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+#                      
+#  orgmanage-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - orgmanage-app  
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+          
+networks:
+  platform_network:
+
+volumes:
+  platform-code-volume:  

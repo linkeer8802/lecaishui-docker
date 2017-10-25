@@ -1,7 +1,7 @@
 version: '3'
 services:
   zoo1:
-    image: zookeeper:3.3.6
+    image: registry.lecaishui.com/zookeeper:3.3.6
     hostname: zoo1
     networks:
       - zook-net  
@@ -10,7 +10,7 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
   
   zoo2:
-    image: zookeeper:3.3.6
+    image: registry.lecaishui.com/zookeeper:3.3.6
     hostname: zoo2
     networks:
       - zook-net      
@@ -19,7 +19,7 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
   
   zoo3:
-    image: zookeeper:3.3.6
+    image: registry.lecaishui.com/zookeeper:3.3.6
     hostname: zoo3
     networks:
       - zook-net

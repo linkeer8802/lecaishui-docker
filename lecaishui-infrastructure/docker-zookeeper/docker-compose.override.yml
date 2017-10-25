@@ -3,14 +3,14 @@ services:
   zoo1:
     restart: always
     ports:
-      - 2181:2181
+      - 2281:2181
   
   zoo2:
     restart: always
     ports:
-      - 2182:2181
+      - 2282:2181
   
   zoo3:
     restart: always
     ports:
-      - 2183:2181
+      - 2283:2181

@@ -1,0 +1,96 @@
+version: '3'
+
+services:
+  usercenter-dubbo:
+    deploy:
+      restart_policy:
+        condition: none
+      placement:
+        constraints:
+          - node.labels.name == dubbo-service
+          
+  usercenter-dubbo:
+    extra_hosts:
+      - "disconf.lecaishui.com:10.173.196.134"       
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == dubbo-service
+                      
+  courses-dubbo:
+    extra_hosts:
+      - "disconf.lecaishui.com:10.173.196.134"       
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == dubbo-service
+                      
+  admin-dubbo:
+    extra_hosts:
+      - "disconf.lecaishui.com:10.173.196.134"       
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == dubbo-service
+                      
+  cms-dubbo:
+    extra_hosts:
+      - "disconf.lecaishui.com:10.173.196.134"       
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == dubbo-service
+                      
+#  website-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - website-app
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+#                        
+#  backend-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - backend-app 
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+#            
+#  mobile-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - mobile-app  
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+#                      
+#  orgmanage-app:
+#    image: registry.lecaishui.com/tomcat:latest
+#    restart: always
+#    networks:
+#       platform_network:
+#         aliases:
+#            - orgmanage-app  
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.labels.name == app-service
+          
+networks:
+  platform_network:
+
+volumes:
+  platform-code-volume:  
