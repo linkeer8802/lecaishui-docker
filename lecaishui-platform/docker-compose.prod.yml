@@ -1,45 +1,49 @@
 version: '3'
 
 services:
-  usercenter-dubbo:
+  build-code:
     deploy:
       restart_policy:
         condition: none
       placement:
         constraints:
-          - node.labels.name == dubbo-service
+          - node.labels.dubbo == dubbo-service
           
   usercenter-dubbo:
     extra_hosts:
-      - "disconf.lecaishui.com:10.173.196.134"       
+      - "disconf.lecaishui.com:10.173.196.134"   
+    command: bin/start.sh debug normal stdout
     deploy:
       placement:
         constraints:
-          - node.labels.name == dubbo-service
+          - node.labels.dubbo == dubbo-service
                       
   courses-dubbo:
     extra_hosts:
-      - "disconf.lecaishui.com:10.173.196.134"       
+      - "disconf.lecaishui.com:10.173.196.134"  
+    command: bin/start.sh debug normal stdout
     deploy:
       placement:
         constraints:
-          - node.labels.name == dubbo-service
+          - node.labels.dubbo == dubbo-service
                       
   admin-dubbo:
     extra_hosts:
       - "disconf.lecaishui.com:10.173.196.134"       
+    command: bin/start.sh debug normal stdout
     deploy:
       placement:
         constraints:
-          - node.labels.name == dubbo-service
+          - node.labels.dubbo == dubbo-service
                       
   cms-dubbo:
     extra_hosts:
       - "disconf.lecaishui.com:10.173.196.134"       
+    command: bin/start.sh debug normal stdout
     deploy:
       placement:
         constraints:
-          - node.labels.name == dubbo-service
+          - node.labels.dubbo == dubbo-service
                       
 #  website-app:
 #    image: registry.lecaishui.com/tomcat:latest
